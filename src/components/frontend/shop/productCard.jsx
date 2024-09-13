@@ -59,7 +59,7 @@ const ProductCard = ({ productItem }) => {
   const handleAdd = async () => {
     if (token) {
       try {
-        const cartResponse = await fetch(`http://localhost:4000/cart/${userId}`, {
+        const cartResponse = await fetch(`https://ecommerce-backend-mdiu.onrender.com/cart/${userId}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -16,7 +16,7 @@ const LoginPage = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:4000/login', {
+      const response = await axios.post('https://ecommerce-backend-mdiu.onrender.com/login', {
         email,
         password,
       }, {

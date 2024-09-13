@@ -21,7 +21,7 @@ import {
 // Fetch products
 export const fetchProducts = () => async (dispatch) => {
   try {
-    const response = await axios.get('http://localhost:4000/admin/product/');
+    const response = await axios.get('https://ecommerce-backend-mdiu.onrender.com/admin/product/');
     dispatch({
       type: FETCHED_PRODUCTS,
       payload: response.data,
@@ -36,7 +36,7 @@ export const fetchProductsById = (id) => async (dispatch) => {
   console.log(id);
   
     try {
-      const response = await axios.get(`http://localhost:4000/admin/product/${id}`);
+      const response = await axios.get(`https://ecommerce-backend-mdiu.onrender.com/admin/product/${id}`);
       dispatch({
         type: FETCHED_PRODUCTS_BY_ID,
         payload: response.data,
@@ -49,7 +49,7 @@ export const fetchProductsById = (id) => async (dispatch) => {
 // Fetch categories
 export const fetchCategories = () => async (dispatch) => {
   try {
-    const response = await axios.get('http://localhost:4000/admin/category/');
+    const response = await axios.get('https://ecommerce-backend-mdiu.onrender.com/admin/category/');
     dispatch({
       type: FETCHED_CATEGORY,
       payload: response.data,
@@ -62,7 +62,7 @@ export const fetchCategories = () => async (dispatch) => {
 // Fetch products by id
 export const fetchCategoriesById = (id) => async (dispatch) => {
     try {
-      const response = await axios.get(`http://localhost:4000/admin/category/${id}`);
+      const response = await axios.get(`https://ecommerce-backend-mdiu.onrender.com/admin/category/${id}`);
       dispatch({
         type: FETCHED_CATEGORY_BY_ID,
         payload: response.data,
@@ -75,7 +75,7 @@ export const fetchCategoriesById = (id) => async (dispatch) => {
 // Fetch cart by user ID
 export const fetchCartByUserId = (userId) => async (dispatch) => {
   try {
-    const response = await axios.get(`http://localhost:4000/cart/${userId}`);    
+    const response = await axios.get(`https://ecommerce-backend-mdiu.onrender.com/cart/${userId}`);    
     dispatch({
       type: FETCHED_CART,
       payload: response.data,
@@ -92,7 +92,7 @@ export const fetchCartProductByIds = (products) => async (dispatch) => {
       productId: product.productId,
       quantity: product.quantity
     }));
-    const response = await axios.post('http://localhost:4000/cart/products', productData);    
+    const response = await axios.post('https://ecommerce-backend-mdiu.onrender.com/cart/products', productData);    
     dispatch({
       type: FETCHED_CART_PRODUCT_DETAILS,
       payload: response.data,
@@ -105,7 +105,7 @@ export const fetchCartProductByIds = (products) => async (dispatch) => {
 //update cart quantity
 export const updateCartProductQuantity = (userId, productId, newQuantity) => async (dispatch) => {
   try {
-    await axios.patch(`http://localhost:4000/cart/product-update/${userId}`, { productId: productId, quantity: newQuantity });
+    await axios.patch(`https://ecommerce-backend-mdiu.onrender.com/cart/product-update/${userId}`, { productId: productId, quantity: newQuantity });
     dispatch({
       type: CART_UPDATE_QUANTITY,
       payload: { productId, newQuantity }
@@ -118,7 +118,7 @@ export const updateCartProductQuantity = (userId, productId, newQuantity) => asy
 // Remove item from cart
 export const removeCartProduct = (userId, productId) => async (dispatch) => {
   try {
-    await axios.patch(`http://localhost:4000/cart/product/${userId}`, { productId: productId });
+    await axios.patch(`https://ecommerce-backend-mdiu.onrender.com/cart/product/${userId}`, { productId: productId });
     dispatch({
       type: CART_REMOVE_ITEM,
       payload: productId
@@ -131,7 +131,7 @@ export const removeCartProduct = (userId, productId) => async (dispatch) => {
 // Fetch wishlist by user ID
 export const fetchWishlistByUserId = (userId) => async (dispatch) => {
   try {
-    const response = await axios.get(`http://localhost:4000/wishlist/${userId}`);
+    const response = await axios.get(`https://ecommerce-backend-mdiu.onrender.com/wishlist/${userId}`);
     dispatch({
       type: FETCHED_WISHLIST,
       payload: response.data,
@@ -144,7 +144,7 @@ export const fetchWishlistByUserId = (userId) => async (dispatch) => {
 // Add to wishlist action
 export const addToWishlist = (userId, productId) => async (dispatch) => {
   try {
-    const { data } = await axios.post(`http://localhost:4000/wishlist/add/${userId}`, { productId });
+    const { data } = await axios.post(`https://ecommerce-backend-mdiu.onrender.com/wishlist/add/${userId}`, { productId });
     dispatch({
       type: ADD_TO_WISHLIST,
       payload: data.products,
@@ -157,7 +157,7 @@ export const addToWishlist = (userId, productId) => async (dispatch) => {
 // Remove from wishlist action
 export const removeFromWishlist = (userId, productId) => async (dispatch) => {
   try {
-    const { data } = await axios.post(`http://localhost:4000/wishlist/remove/${userId}`, { productId });
+    const { data } = await axios.post(`https://ecommerce-backend-mdiu.onrender.com/wishlist/remove/${userId}`, { productId });
     dispatch({
       type: REMOVE_FROM_WISHLIST,
       payload: data.products,
@@ -170,7 +170,7 @@ export const removeFromWishlist = (userId, productId) => async (dispatch) => {
 // Fetch User from db action
 export const fetchUserById = (userId) => async (dispatch) => {
   try {
-    const { data } = await axios.get(`http://localhost:4000/admin/users/${userId}`);
+    const { data } = await axios.get(`https://ecommerce-backend-mdiu.onrender.com/admin/users/${userId}`);
     dispatch({
       type: FETCH_USER_BY_ID,
       payload: data,
@@ -183,7 +183,7 @@ export const fetchUserById = (userId) => async (dispatch) => {
 // get Order by userId
 export const getOrders = () => async (dispatch) => {  
   try {
-    const { data } = await axios.get(`http://localhost:4000/order`);
+    const { data } = await axios.get(`https://ecommerce-backend-mdiu.onrender.com/order`);
     dispatch({
       type:   FETCH_ORDERS,
       payload: data,
@@ -196,7 +196,7 @@ export const getOrders = () => async (dispatch) => {
 // get Order by userId
 export const getOrderByOrderId = (orderId) => async (dispatch) => {    
   try {
-    const { data } = await axios.get(`http://localhost:4000/order/id/${orderId}`);
+    const { data } = await axios.get(`https://ecommerce-backend-mdiu.onrender.com/order/id/${orderId}`);
     dispatch({
       type: FETCH_ORDERS_BY_ORDER_ID,
       payload: data,
@@ -209,7 +209,7 @@ export const getOrderByOrderId = (orderId) => async (dispatch) => {
 // get Order by userId
 export const getOrderByUserId = (userId) => async (dispatch) => {  
   try {
-    const { data } = await axios.get(`http://localhost:4000/order/${userId}`);
+    const { data } = await axios.get(`https://ecommerce-backend-mdiu.onrender.com/order/${userId}`);
     dispatch({
       type: FETCH_ORDER_BY_USER_ID,
       payload: data,
@@ -222,7 +222,7 @@ export const getOrderByUserId = (userId) => async (dispatch) => {
 // Save Order
 export const saveOrder = (userId, products, shipping, total) => async (dispatch) => {  
   try {
-    const { data } = await axios.post(`http://localhost:4000/order/${userId}`, { products, shipping, total });
+    const { data } = await axios.post(`https://ecommerce-backend-mdiu.onrender.com/order/${userId}`, { products, shipping, total });
     dispatch({
       type: SAVE_ORDER,
       payload: data,

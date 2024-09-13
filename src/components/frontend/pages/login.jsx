@@ -11,7 +11,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:4000/login', { email, password });
+      const response = await axios.post('https://ecommerce-backend-mdiu.onrender.com/login', { email, password });
   
       if (response.data.data.token) {
         document.cookie = `token=${response.data.data.token}; path=/; secure; samesite=strict`;

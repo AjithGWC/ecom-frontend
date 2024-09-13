@@ -35,7 +35,7 @@ const ProductAdd = () => {
 
         const fetchCategoryOptions = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/admin/category/', {
+                const response = await axios.get('https://ecommerce-backend-mdiu.onrender.com/admin/category/', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -52,7 +52,7 @@ const ProductAdd = () => {
 
         const fetchSellerOptions = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/admin/users/', {
+                const response = await axios.get('https://ecommerce-backend-mdiu.onrender.com/admin/users/', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -73,7 +73,7 @@ const ProductAdd = () => {
 
         const fetchCountryOptions = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/admin/country/', {
+                const response = await axios.get('https://ecommerce-backend-mdiu.onrender.com/admin/country/', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

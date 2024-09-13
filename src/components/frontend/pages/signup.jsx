@@ -27,7 +27,7 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:4000/admin/users/', formData);
+      const response = await axios.post('https://ecommerce-backend-mdiu.onrender.com/admin/users/', formData);
       console.log(response);
       
       if (response.status == "201") {
