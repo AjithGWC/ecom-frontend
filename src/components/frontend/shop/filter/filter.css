@@ -1,0 +1,36 @@
+.custom-select__control {
+    background-color: #0f3460 !important;
+    color: white !important;
+    border-radius: 5px;
+    border: none;
+    box-shadow: none;
+    width: 200px;
+    height: 40px;
+}
+
+.custom-select__placeholder{
+    color: #fff !important;
+}
+
+.custom-select__menu {
+    width: 30% !important;
+}
+
+.custom-select__option {
+    background-color: white;
+    color: #0f3460;
+}
+
+.custom-select__option--is-selected {
+    background-color: #0f3460;
+    color: white !important;
+}
+
+.custom-select__option:hover {
+    background-color: #0f3460;
+    color: white !important;
+}
+
+.custom-select__single-value {
+    color: white !important;
+}

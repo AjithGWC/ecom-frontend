@@ -1,0 +1,17 @@
+.bg-login {
+  min-height: 100vh;
+  background-image: url('https://static.vecteezy.com/system/resources/previews/008/311/935/non_2x/the-illustration-graphic-consists-of-abstract-background-with-a-blue-gradient-dynamic-shapes-composition-eps10-perfect-for-presentation-background-website-landing-page-wallpaper-vector.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 8%;
+}
+
+.bg-signup {
+  min-height: 100vh;
+  background-image: url('https://thumbs.dreamstime.com/b/social-media-advertisement-background-colorful-square-patterns-332087728.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 8%;
+}

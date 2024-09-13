@@ -1,0 +1,62 @@
+html, body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    background-color: #B5C9C3 !important;
+}
+
+.bg-primary{
+    background-color: #B5C9C3 !important;
+}
+
+.list_image{
+  width: 12rem;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+.list_image:hover{
+    transform: scale(1.1);
+}
+
+.object-cover{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-icon {
+    position: absolute;
+    left: 817px;
+    top: 345px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #999;
+    pointer-events: none; 
+}
+
+.product-image{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20230617/pngtree-visualizing-e-commerce-in-benin-through-3d-rendering-for-social-media-image_3640688.jpg");
+}
+
+.h-90rem{
+    height: 39.2rem;
+}
+
+.mx-8r{
+    margin: 2% 35% 0rem 35%;
+}
+
+.border-img{
+    border-radius: 6rem;
+}
+
+.model-width{
+    width: 40rem;
+}
