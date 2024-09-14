@@ -23,7 +23,7 @@ const NavBar = () => {
 
   const [isFixed, setIsFixed] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+ 
   useEffect(() => {
     const checkScroll = () => {
       if (window.scrollY > 0 || window.innerHeight >= document.body.scrollHeight) {
@@ -41,12 +41,7 @@ const NavBar = () => {
   useEffect(() => {
     if (token && userId) {
       dispatch(fetchCartByUserId(userId));
-
-      const intervalId = setInterval(() => {
-        dispatch(fetchCartByUserId(userId));
-      }, 1000);
-
-      return () => clearInterval(intervalId);
+      // dispatch(fetchCartByUserId(userId));      
     }
   }, [token, userId, dispatch]);
 

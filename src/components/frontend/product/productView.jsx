@@ -33,7 +33,6 @@ const ProductView = ({ product, category }) => {
       setQuantity(1); 
     }
   };
-console.log(quantity);
 
   const handleAdd = async () => {
     if (token) {

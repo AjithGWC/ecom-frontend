@@ -43,11 +43,11 @@ const ProductCard = ({ productItem }) => {
 
     checkFavoriteStatus();
 
-    const intervalId = setInterval(() => {
-      if (storedToken && storedUserId) {
-        dispatch(fetchWishlistByUserId(userId, token));
-      }
-    }, 1000);
+    // const intervalId = setInterval(() => {
+    //   if (storedToken && storedUserId) {
+    //     dispatch(fetchWishlistByUserId(userId, token));
+    //   }
+    // }, 1000);
 
     return () => clearInterval(intervalId);
   }, [wishlistItems, productItem._id, fetchedWishlist, token, userId, dispatch]);
