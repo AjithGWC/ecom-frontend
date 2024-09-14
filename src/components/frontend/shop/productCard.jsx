@@ -49,7 +49,7 @@ const ProductCard = ({ productItem }) => {
     //   }
     // }, 1000);
 
-    return () => clearInterval(intervalId);
+    // return () => clearInterval(intervalId);
   }, [wishlistItems, productItem._id, fetchedWishlist, token, userId, dispatch]);
 
   const handleClick = () => {
