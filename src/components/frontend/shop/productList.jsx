@@ -21,7 +21,7 @@ const ProductList = () => {
   }, [products]);
 
   return (
-    <div className="bg-primary mb-8">
+    <div className="bg-primary">
       <div className="p-4 flex">
         <FilterSelect products={products} setFilteredProducts={setFilteredProducts} />
         <div className="w-2/5 ml-10">
