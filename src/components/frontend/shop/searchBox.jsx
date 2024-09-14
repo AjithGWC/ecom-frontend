@@ -17,7 +17,7 @@ const SearchBox = ({ setFilteredProducts, products }) => {
   };
 
   return (
-    <div>
+    <div className='flex'>
         <input
         type="text"
         value={searchTerm}

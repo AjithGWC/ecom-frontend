@@ -29,10 +29,10 @@ html{
 }
 
 .search-icon {
-    position: absolute;
-    left: 817px;
-    top: 345px;
-    transform: translateY(-50%);
+    position: relative;
+    right: 6%;
+    margin-top: 1.5%;
+    /* transform: translateY(-50%); */
     font-size: 20px;
     color: #999;
     pointer-events: none; 
