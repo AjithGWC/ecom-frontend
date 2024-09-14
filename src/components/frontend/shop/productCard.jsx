@@ -146,7 +146,7 @@ const ProductCard = ({ productItem }) => {
             <button
               aria-label="Add to cart"
               type="button"
-              className="bg-blue-500 px-3 py-2 rounded-full hover:bg-blue-600 flex items-center space-x-2"
+              className="px-3 py-2 bg-stone-300 rounded-full hover:bg-blue-600 hover:text-white hover:border-none flex items-center space-x-2"
               onClick={handleAdd}
             >
               <span>Add to Cart</span>
