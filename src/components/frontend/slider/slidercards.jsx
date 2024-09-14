@@ -8,14 +8,16 @@ const SlideCard = ({ id, title, desc, cover }) => {
   }
 
   return (
-    <div className="box bg-white shadow-md h-full flex items-center justify-center">
-      <div className="flex md:flex-row w-full h-full">
-          <img
-            src={cover}
-            alt={title}
-            className="w-full h-96 object-cover" 
-            onClick={navigateShop}
-          />
+    <div className="box bg-white shadow-md h-full flex flex-col md:flex-row items-center justify-center">
+      <div className="w-full md:w-1/2">
+        <img
+          src={cover}
+          alt={title}
+          className="w-full h-96 md:h-96 object-cover cursor-pointer"
+          onClick={navigateShop}
+        />
+      </div>
+      <div className="w-full md:w-1/2 text-center md:text-left">
       </div>
     </div>
   );

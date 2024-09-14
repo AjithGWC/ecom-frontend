@@ -17,15 +17,15 @@ const SearchBox = ({ setFilteredProducts, products }) => {
   };
 
   return (
-    <div className='flex'>
-        <input
+    <div className='flex items-center border rounded-lg p-2 w-full md:w-64'>
+      <input
         type="text"
         value={searchTerm}
         onChange={handleSearch}
         placeholder="Search products..."
-        className="border rounded-lg p-2 w-full md:w-64"
-        />
-        <Search className='search-icon' />
+        className="w-full p-2 outline-none text-sm"
+      />
+      <Search className='text-gray-400 ml-2' />
     </div>
   );
 };

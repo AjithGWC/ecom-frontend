@@ -122,7 +122,7 @@ const ProductCard = ({ productItem }) => {
   };
 
   return (
-    <div className="relative bg-white p-4 h-80 border rounded-lg shadow-md">
+    <div className="relative bg-white p-4 h-full border rounded-lg shadow-md flex flex-col">
       <img
         loading="lazy"
         onClick={handleClick}
@@ -154,13 +154,13 @@ const ProductCard = ({ productItem }) => {
               min="1"
               value={quantity}
               onChange={handleQuantityChange}
-              className="border rounded p-1 text-center"
+              className="border rounded p-1 text-center w-16"
               onKeyDown={(e) => e.key === '-' && e.preventDefault()} 
             />
             <button
               aria-label="Add to cart"
               type="button"
-              className="px-3 py-2 bg-stone-300 rounded-full hover:bg-blue-600 hover:text-white hover:border-none flex items-center space-x-2"
+              className="px-3 py-2 bg-stone-300 rounded-full hover:bg-blue-600 hover:text-white flex items-center space-x-2"
               onClick={handleAdd}
             >
               <span>Add to Cart</span>

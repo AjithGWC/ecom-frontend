@@ -49,8 +49,8 @@ const SliderHome = () => {
   };
 
   return (
-    <section className="bg-primary homeSlide py-8 relative">
-      <div className="container mx-auto">
+    <section className="bg-primary py-8 relative">
+      <div className="container mx-auto px-4 md:px-8">
         <Slider {...settings}>
           {sliderData.map((value, index) => (
             <SlideCard key={index} id={value._id} title={value.Name} cover={value.image} desc={value.description} />

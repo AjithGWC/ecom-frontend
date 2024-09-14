@@ -4,6 +4,7 @@ import { removeCart, updateCartQuantity } from '../../../redux/actions/cartActio
 import { updateCartProductQuantity, removeCartProduct, fetchCartByUserId } from '../../../redux/actions/APIActions';
 import Cookies from 'js-cookie';
 import { Link, useNavigate } from 'react-router-dom';
+import "./cart.css"
 
 const Cart = () => {
     const navigate = useNavigate();
@@ -98,16 +99,12 @@ const Cart = () => {
                     const product = item.product || item; 
                     return (
                       <div className='m-4 px-4 py-6 rounded-lg bg-white' key={product._id}>
-                        <li className="flex items-center border-b py-4">
-                          <img
-                            src={product.image}
-                            alt={product.Name}
-                            className="w-24 h-24 object-cover rounded"
-                          />
-                          <div className="ml-4 flex-1">
+                        <li className="cart-item">
+                          <img src={product.image} alt={product.Name} />
+                          <div className="details">
                             <h2 className="text-lg font-semibold">{product.Name}</h2>
                             <p className="text-gray-600">Price: ${parseFloat(product.price).toFixed(2)}</p>
-                            <div className="flex items-center space-x-2">
+                            <div className="flex items-center space-x-2 mt-2">
                               <input
                                 type="number"
                                 min="1"
@@ -118,7 +115,7 @@ const Cart = () => {
                             </div>
                           </div>
                           <button
-                            className="ml-4 text-red-500 hover:text-red-700"
+                            className="remove-button text-red-500 hover:text-red-700"
                             onClick={() => handleRemove(product)}
                           >
                             Remove

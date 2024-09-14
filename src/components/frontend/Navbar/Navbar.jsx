@@ -75,96 +75,72 @@ const NavBar = () => {
   };
 
   return (
-    <nav className={`w-full top-0 z-50 transition-all duration-300 ease-out ${isFixed ? 'fixed shadow-lg' : 'relative'}`}>
-      <div className="p-0 container bg-white mx-auto flex justify-between items-center py-4 px-6">
-        <Link to="/" className="text-3xl font-bold text-black mr-4">
-          Ecom Site
+    <nav className={`w-full top-0 z-50 bg-white ${isFixed ? 'fixed shadow-lg' : 'relative'} transition-all duration-300`}>
+      <div className="container mx-auto flex justify-between items-center py-4 px-6">
+        <Link to="/" className="text-2xl font-bold text-black">
+          AK Shop
         </Link>
         
-        <div className="flex mr-auto ml-12 space-x-4">
+        <div className="flex space-x-4">
           <Link
             to="/"
-            className={`text-lg font-semibold ${location.pathname === '/' ? 'bg-blue-100' : 'text-black'}`}
-            aria-label="Go to Home Page"
+            className={`text-lg font-semibold ${location.pathname === '/' ? 'text-blue-600' : 'text-black hover:text-blue-600'}`}
           >
             Home
           </Link>
           <Link
             to="/shop"
-            className={`text-lg font-semibold ${location.pathname === '/shop' ? 'bg-blue-100' : 'text-black'}`}
-            aria-label="Go to Shop Page"
+            className={`text-lg font-semibold ${location.pathname === '/shop' ? 'text-blue-600' : 'text-black hover:text-blue-600'}`}
           >
             Shop
           </Link>
         </div>
-        {/* <div className='mr-auto'>
-          <div className="search-container">
-            <input type="text" placeholder="Search..." />
-            <Search className='search-icon' />
-          </div>
-        </div> */}
-        <div className="flex">
+
+        <div className="flex items-center space-x-4">
           {token ? (
-            <div className="relative mr-6">
-              <button
-                aria-label="User Profile"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="relative text-black flex items-center"
-              >
-                <User aria-label="User" className="w-7 h-7" />
-                {dropdownOpen && (
-                  <div className="user-dropdown mt-2 w-48 bg-white shadow-lg rounded-lg border border-gray-200">
-                    <button
-                      className="block w-full text-left px-4 py-2 text-black hover:bg-gray-100"
-                      onClick={handleProfile}
-                    >
-                      My Profile
-                    </button>
-                    <button
-                      className="block w-full text-left px-4 py-2 text-black hover:bg-gray-100"
-                      onClick={handleLogout}
-                    >
-                      Logout
-                    </button>
-                  </div>
-                )}
+            <div className="relative">
+              <button onClick={() => setDropdownOpen(!dropdownOpen)} className="text-black">
+                <User className="w-7 h-7" />
               </button>
+              {dropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg">
+                  <button
+                    className="block w-full text-left px-4 py-2 text-black hover:bg-gray-100"
+                    onClick={handleProfile}
+                  >
+                    My Profile
+                  </button>
+                  <button
+                    className="block w-full text-left px-4 py-2 text-black hover:bg-gray-100"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
-            <div className="relative mr-6">
-              <Link
-                aria-label="Go to Login Page"
-                to="/login"
-                className="relative inline-flex items-center px-4 py-1 border border-2 border-black rounded-lg shadow-sm hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-              >
-                Login
-              </Link>
-            </div>
+            <Link
+              to="/login"
+              className="inline-flex items-center px-4 py-1 border border-black rounded-lg shadow-sm hover:bg-black hover:text-white"
+            >
+              Login
+            </Link>
           )}
-          <div className="relative mr-6">
-            <Link
-              aria-label="Go to Cart Page"
-              to="/cart"
-              className="relative text-black"
-            >
-              <ShoppingCart aria-label="Cart" className="w-7 h-7" />
-              <span className="absolute -top-2 -right-2 bg-blue-800 text-white text-xs font-semibold rounded-full w-4 h-4 flex items-center justify-center">
-                {totalCartQuantity}
-              </span>
-            </Link>
-          </div>
-          <div className="relative mr-4">
-            <Link
-              aria-label="Go to Favorites Page"
-              to="/favorites"
-              className="relative text-black"
-            >
-              <Heart aria-label="Favorites" className="w-7 h-7" />
-              <span className="absolute -top-2 -right-2 bg-blue-800 text-white text-xs font-semibold rounded-full w-4 h-4 flex items-center justify-center">
-                {totalWishlistQuantity}
-              </span>
-            </Link>
-          </div>
+
+          <Link to="/cart" className="relative text-black">
+            <ShoppingCart className="w-7 h-7" />
+            <span className="absolute -top-2 -right-2 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              {totalCartQuantity}
+            </span>
+          </Link>
+
+          <Link to="/favorites" className="relative text-black">
+            <Heart className="w-7 h-7" />
+            <span className="absolute -top-2 -right-2 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              {totalWishlistQuantity}
+            </span>
+          </Link>
         </div>
       </div>
     </nav>

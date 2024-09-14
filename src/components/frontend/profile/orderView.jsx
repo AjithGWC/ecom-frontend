@@ -17,7 +17,7 @@ console.log(ordersByOrderId);
 
     return (
         <div>
-            <div className="grid grid-cols-3 gap-4 flex">
+            <div className="grid grid-cols-3 gap-4 flex md:mt-6 mt-15 sm:mt-4">
                 {ordersByOrderId.length > 0 ? (
                     ordersByOrderId.map((order, index) => (
                         <div key={index} className="p-4 rounded bg-white h-80">

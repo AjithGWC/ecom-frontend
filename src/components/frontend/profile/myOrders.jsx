@@ -31,42 +31,43 @@ const MyOrders = () => {
   };
 
   return (
-    <div className="container py-4">
+    <div className="container py-4 px-2 md:px-4 md:mt-6 mt-15 sm:mt-4">
       <h1 className="text-2xl bg-white py-2 font-bold text-center">My Orders</h1>
       <div className="mt-4">
-        <div className="bg-white p-3">
-          <table className="table table-bordered w-full">
-            <thead>
+        <div className="bg-white p-3 rounded-lg shadow-md overflow-x-auto">
+          <table className="table-auto w-full text-sm">
+            <thead className="bg-gray-100">
               <tr>
-                <th>S.No</th>
-                <th>Order Id</th>
-                <th>Order Amount</th>
-                <th>Order Status</th>
-                <th>Created At</th>
-                <th>Action</th>
+                <th className="py-2 px-4">S.No</th>
+                <th className="py-2 px-4">Order Id</th>
+                <th className="py-2 px-4">Order Amount</th>
+                <th className="py-2 px-4">Order Status</th>
+                <th className="py-2 px-4">Created At</th>
+                <th className="py-2 px-4">Action</th>
               </tr>
             </thead>
             <tbody>
               {fetchedUserOrders.length > 0 ? (
                 fetchedUserOrders.map((order, index) => (
-                  <tr key={order._id}>
-                    <td>{ ++index }</td>
-                    <td>{order._id}</td>
-                    <td>{order.orderTotalAmount}</td>
-                    <td>{order.orderStatus}</td>
-                    <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-                    <td>
-                      <div className='flex justify-around'>
-                        <button className='flex btn-orange' onClick={() => handleViewClick(order._id)}>
-                          <Eye size={20} color='blue' /> View
-                        </button>
-                      </div>
+                  <tr key={order._id} className="border-b">
+                    <td className="py-2 px-4">{ ++index }</td>
+                    <td className="py-2 px-4">{order._id}</td>
+                    <td className="py-2 px-4">{order.orderTotalAmount}</td>
+                    <td className="py-2 px-4">{order.orderStatus}</td>
+                    <td className="py-2 px-4">{new Date(order.createdAt).toLocaleDateString()}</td>
+                    <td className="py-2 px-4">
+                      <button
+                        className="flex items-center text-blue-500 hover:text-blue-700"
+                        onClick={() => handleViewClick(order._id)}
+                      >
+                        <Eye size={20} /> <span className="ml-2">View</span>
+                      </button>
                     </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="6" className="text-center">No orders found</td>
+                  <td colSpan="6" className="text-center py-4">No orders found</td>
                 </tr>
               )}
             </tbody>
