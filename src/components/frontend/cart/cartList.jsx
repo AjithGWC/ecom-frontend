@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeCart, updateCartQuantity } from '../../../redux/actions/cartActions'; 
-import { updateCartProductQuantity, removeCartProduct } from '../../../redux/actions/APIActions';
+import { updateCartProductQuantity, removeCartProduct, fetchCartByUserId } from '../../../redux/actions/APIActions';
 import Cookies from 'js-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -46,7 +46,13 @@ const Cart = () => {
   const handleRemove = (product) => {
     const productId = token && userId ? product.productId : product._id;
     if (token && userId) {
-      dispatch(removeCartProduct(userId, productId));
+      dispatch(removeCartProduct(userId, productId))
+      .then(() => {
+        dispatch(fetchCartByUserId(userId))
+      })
+      .catch((error) => {
+        console.error('Failed to add product to wishlist:', error);
+      }); 
     } else {
       dispatch(removeCart(productId));
     }
@@ -55,11 +61,14 @@ const Cart = () => {
   const handleQuantityChange = (product, newQuantity) => {
     const productId = token && userId ? product.productId : product._id;
     if (newQuantity > 0) {
-      if (token && userId) {
-        console.log(productId);
-        console.log(newQuantity);
-        
-        dispatch(updateCartProductQuantity(userId, productId, newQuantity));
+      if (token && userId) {        
+        dispatch(updateCartProductQuantity(userId, productId, newQuantity))
+        .then(() => {
+          dispatch(fetchCartByUserId(userId))
+        })
+        .catch((error) => {
+          console.error('Failed to add product to wishlist:', error);
+        }); 
       } else {
         dispatch(updateCartQuantity(productId, newQuantity));
       }

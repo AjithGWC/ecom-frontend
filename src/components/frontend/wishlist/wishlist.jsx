@@ -32,8 +32,14 @@ const Wishlist = () => {
 
   const handleRemove = (productId) => {
     if (token && userId) {
-        dispatch(addToWishlist(userId, productId));
-        dispatch(fetchWishlistByUserId(userId));
+        dispatch(addToWishlist(userId, productId))
+        .then(() => {
+          dispatch(fetchWishlistByUserId(userId));
+          setIsFavorite(prev => prev.filter(item => item._id !== productId));
+        })
+        .catch((error) => {
+          console.error('Failed to add product to wishlist:', error);
+        });
     } else {
       const updatedWishlist = isFavorite.filter(item => item._id !== productId);
       dispatch(removeWishlist(productId));

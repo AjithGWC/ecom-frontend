@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCart } from '../../../redux/actions/cartActions';
 import Cookies from 'js-cookie';
 import { setWishlist, removeWishlist } from '../../../redux/actions/wishlistActions';
-import { addToWishlist, fetchWishlistByUserId } from '../../../redux/actions/APIActions';
+import { addToWishlist, fetchCartByUserId, fetchWishlistByUserId } from '../../../redux/actions/APIActions';
 import { selectWishlistItems } from '../../../redux/selectors/wishlistSelector';
 
 const ProductCard = ({ productItem }) => {
@@ -16,7 +16,21 @@ const ProductCard = ({ productItem }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [token, setToken] = useState('');
   const [userId, setUserId] = useState('');
+  // const [fetchedWishlists, setFetchedWishlists] = useState([]);
+  // const [fetchedCarts, setFetchedCarts] = useState([]);
   const fetchedWishlist = useSelector((state) => state.apireducer.fetchedWishlist) || {};
+  const fetchedCart = useSelector((state) => state.apireducer.fetchedCart) || {};
+
+  // useEffect(() => {
+  //   if(fetchedCart){
+  //     setFetchedCarts(fetchedCart);
+  //   }
+    
+  //   if(fetchedWishlist){
+  //     setFetchedWishlists(fetchedWishlist);
+  //   }
+    
+  // }, [fetchedCart, fetchedWishlist]);
 
   useEffect(() => {
     const storedToken = Cookies.get('token');
@@ -43,13 +57,6 @@ const ProductCard = ({ productItem }) => {
 
     checkFavoriteStatus();
 
-    // const intervalId = setInterval(() => {
-      if (storedToken && storedUserId) {
-        dispatch(fetchWishlistByUserId(userId, token));
-      }
-    // }, 1000);
-
-    // return () => clearInterval(intervalId);
   }, [wishlistItems, productItem._id, fetchedWishlist, token, userId, dispatch]);
 
   const handleClick = () => {
@@ -75,6 +82,7 @@ const ProductCard = ({ productItem }) => {
           console.error('Failed to update cart');
         } else {
           dispatch(setCart(productItem, quantity));
+          dispatch(fetchCartByUserId(userId));
         }
       } catch (error) {
         console.error('Failed to add product to cart:', error);
@@ -86,7 +94,13 @@ const ProductCard = ({ productItem }) => {
 
   const handleFavorite = () => {
     if (token && userId) {
-      dispatch(addToWishlist(userId, productItem._id));
+      dispatch(addToWishlist(userId, productItem._id))
+      .then(() => {
+        dispatch(fetchWishlistByUserId(userId));
+      })
+      .catch((error) => {
+        console.error('Failed to add product to wishlist:', error);
+      });
     } else {
       if (isFavorite) {
         dispatch(removeWishlist(productItem._id));
