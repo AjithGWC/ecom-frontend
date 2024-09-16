@@ -160,9 +160,7 @@ export const createProduct = (token, formData) => async (dispatch) => {
   };
 
   // Action to fetch Seller by Id
-  export const fetchSellerById = (token, sellerId) => async (dispatch) => {
-    console.log(sellerId);
-    
+  export const fetchSellerById = (token, sellerId) => async (dispatch) => {    
     try {
       const response = await axios.get(`https://ecommerce-backend-mdiu.onrender.com/admin/seller/${sellerId}`, {
         headers: {
@@ -199,8 +197,6 @@ export const createProduct = (token, formData) => async (dispatch) => {
     
   // Action to delete a Seller
   export const deleteSeller = (token, sellerId) => async (dispatch) => {
-    console.log(sellerId);
-    
     try {
       const response = await axios.delete(`https://ecommerce-backend-mdiu.onrender.com/admin/seller/${sellerId}`, {
         headers: {

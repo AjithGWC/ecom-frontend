@@ -6,6 +6,7 @@ import { selectCartItems } from '../../../redux/selectors/cartSelector';
 import { selectWishlistItems } from '../../../redux/selectors/wishlistSelector';
 import { ShoppingCart, Heart, User, Search } from 'react-feather';
 import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 import './navbar.css';
 
 const NavBar = () => {
@@ -68,6 +69,9 @@ const NavBar = () => {
     Cookies.remove('role', { path: '/' });
     Cookies.remove('userId', { path: '/' });
     navigate('/login');
+    setTimeout(() => {
+      toast.success('Logged-out successful!', { autoClose: 5000 });
+    }, 500);
   };
 
   const handleProfile = () =>{

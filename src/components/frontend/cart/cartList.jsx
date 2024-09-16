@@ -3,7 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeCart, updateCartQuantity } from '../../../redux/actions/cartActions'; 
 import { updateCartProductQuantity, removeCartProduct, fetchCartByUserId } from '../../../redux/actions/APIActions';
 import Cookies from 'js-cookie';
+import { Trash } from 'react-feather';
 import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./cart.css"
 
 const Cart = () => {
@@ -50,12 +53,14 @@ const Cart = () => {
       dispatch(removeCartProduct(userId, productId))
       .then(() => {
         dispatch(fetchCartByUserId(userId))
+        toast.success('Product Removed From Cart successful!', { autoClose: 3000 });
       })
       .catch((error) => {
-        console.error('Failed to add product to wishlist:', error);
+        toast.error('Failed to add to Cart', { autoClose: 5000 });
       }); 
     } else {
       dispatch(removeCart(productId));
+      toast.success('Product Removed From Cart successful!', { autoClose: 3000 });
     }
   };
 
@@ -66,12 +71,14 @@ const Cart = () => {
         dispatch(updateCartProductQuantity(userId, productId, newQuantity))
         .then(() => {
           dispatch(fetchCartByUserId(userId))
+          toast.success('Product Quantity Updated successful!', { autoClose: 3000 });
         })
         .catch((error) => {
-          console.error('Failed to add product to wishlist:', error);
+          toast.error('Failed to Update product Quantity', { autoClose: 5000 });
         }); 
       } else {
         dispatch(updateCartQuantity(productId, newQuantity));
+        toast.success('Product Quantity Updated successful!', { autoClose: 3000 });
       }
     }
   };
@@ -115,9 +122,10 @@ const Cart = () => {
                             </div>
                           </div>
                           <button
-                            className="remove-button text-red-500 hover:text-red-700"
+                            className="remove-button text-red-500 hover:text-red-700 flex"
                             onClick={() => handleRemove(product)}
                           >
+                            <Trash />
                             Remove
                           </button>
                         </li>
@@ -154,6 +162,7 @@ const Cart = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

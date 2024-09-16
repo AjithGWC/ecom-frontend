@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 import { setWishlist, removeWishlist } from '../../../redux/actions/wishlistActions';
 import { addToWishlist, fetchCartByUserId, fetchWishlistByUserId } from '../../../redux/actions/APIActions';
 import { selectWishlistItems } from '../../../redux/selectors/wishlistSelector';
+import { toast } from 'react-toastify';
 
 const ProductCard = ({ productItem }) => {
   const navigate = useNavigate();
@@ -81,6 +82,7 @@ const ProductCard = ({ productItem }) => {
         if (!cartResponse.ok) {
           console.error('Failed to update cart');
         } else {
+          toast.success('Cart Updated successful!', { autoClose: 5000 });
           dispatch(setCart(productItem, quantity));
           dispatch(fetchCartByUserId(userId));
         }

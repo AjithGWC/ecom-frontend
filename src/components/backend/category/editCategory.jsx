@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategoriesById } from "../../../redux/actions/APIActions";
 import { updateCategory } from "../../../redux/actions/backend/backendActions";
+import { toast } from 'react-toastify';
 
 const CategoryEdit = () => {
 
@@ -41,6 +42,9 @@ const CategoryEdit = () => {
         try {
             dispatch(updateCategory(token, id, formData));
             navigate('/backend/category');
+            setTimeout(() => {
+                toast.success('category Updated successfully!!', { autoClose: 5000 });
+            }, 500);
         } catch (error) {
             console.error('Error updating product:', error);
         }
@@ -83,6 +87,7 @@ const CategoryEdit = () => {
                                 placeholder="Type Category Name"
                                 value={formData.Name}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -96,6 +101,7 @@ const CategoryEdit = () => {
                                 placeholder="Type Image Name"
                                 value={formData.image}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -108,6 +114,7 @@ const CategoryEdit = () => {
                                 placeholder="Type Category Description"
                                 value={formData.description}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                     </div>

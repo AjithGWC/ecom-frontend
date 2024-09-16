@@ -10,7 +10,7 @@ const PaymentDetails = () => {
   return (
     <div className="payment-details p-4 bg-white rounded-lg shadow-md">
       <h2 className="text-xl font-semibold mb-4">Payment Method</h2>
-      <form className='flex justify-around'>
+      <form className="flex flex-col lg:flex-row justify-around space-y-4 lg:space-y-0">
         <div className="mb-4">
           <label className="inline-flex items-center">
             <input

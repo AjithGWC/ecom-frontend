@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductsById } from '../../../redux/actions/APIActions'; 
 import { updateProduct } from "../../../redux/actions/backend/backendActions";
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import '../../../dist/css/app.css';
 
 const getAuthToken = () => {
@@ -141,6 +142,9 @@ const ProductEdit = () => {
             console.log(formData);
             dispatch(updateProduct(token, id, formData));
             navigate('/backend/product');
+            setTimeout(() => {
+                toast.success('Product Updated successfully!!', { autoClose: 5000 });
+            }, 500);
         } catch (error) {
             console.error('Error updating product:', error);
         }
@@ -177,6 +181,7 @@ const ProductEdit = () => {
                                 placeholder="Type Product Name"
                                 value={formData.Name}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -191,6 +196,7 @@ const ProductEdit = () => {
                                 onChange={handleSelectChange}
                                 value={selectedCategory}
                                 isSearchable={true}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -203,6 +209,7 @@ const ProductEdit = () => {
                                 placeholder="Type Product Description"
                                 value={formData.description}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -216,6 +223,7 @@ const ProductEdit = () => {
                                 placeholder="Type Image URL"
                                 value={formData.image}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
 
@@ -231,6 +239,7 @@ const ProductEdit = () => {
                                 onChange={handleSelectChange}
                                 value={selectedSeller}
                                 isSearchable={true}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -245,6 +254,7 @@ const ProductEdit = () => {
                                 onChange={handleSelectChange}
                                 value={selectedCurrency}
                                 isSearchable={true}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -258,6 +268,7 @@ const ProductEdit = () => {
                                 placeholder="Type Product Price"
                                 value={formData.price}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -271,6 +282,7 @@ const ProductEdit = () => {
                                 placeholder="Type Product Quantity"
                                 value={formData.quantity}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                     </div>

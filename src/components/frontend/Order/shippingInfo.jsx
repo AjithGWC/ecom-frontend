@@ -1,27 +1,33 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchUserById } from '../../../redux/actions/APIActions';
 import { useSelector, useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
 
 const ShippingInfo = () => {
-    const dispatch = useDispatch();
-    const fetchedUserDetails = useSelector((state) => state.apireducer.fetchUserById) || [];
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const fetchedUserDetails = useSelector((state) => state.apireducer.fetchUserById) || [];
 
-    const token = Cookies.get('token');
-    const userId = Cookies.get('userId');
+  const token = Cookies.get('token');
+  const userId = Cookies.get('userId');
 
-    useEffect(() => {
-      if (token && userId && (!fetchedUserDetails || !fetchedUserDetails._id)) {
-        dispatch(fetchUserById(userId));
-      }
-    }, [token, userId, dispatch]); 
-  
-    const address = fetchedUserDetails?.address || '';
-    const city = fetchedUserDetails?.district || '';
-    const countryCode = fetchedUserDetails?.countryCode || '';
-    const country = fetchedUserDetails?.country || '';
-    const phoneNumber = fetchedUserDetails?.phoneNumber || '';
-    
+  useEffect(() => {
+    if (token && userId && (!fetchedUserDetails || !fetchedUserDetails._id)) {
+      dispatch(fetchUserById(userId));
+    }
+  }, [token, userId, dispatch]); 
+
+  const handleProfile = () => {
+    navigate(`/profile/${userId}`);
+  };
+
+  const address = fetchedUserDetails?.address || '';
+  const city = fetchedUserDetails?.district || '';
+  const countryCode = fetchedUserDetails?.countryCode || '';
+  const country = fetchedUserDetails?.country || '';
+  const phoneNumber = fetchedUserDetails?.phoneNumber || '';
+
   return (
     <div className="shipping-info mb-8 p-4 bg-white rounded-lg shadow-md">
       <h2 className="text-xl font-semibold mb-4">Billing Information</h2>
@@ -67,6 +73,15 @@ const ShippingInfo = () => {
           />
         </div>
       </form>
+      <div className="mt-6 flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
+        <h3 className="text-lg font-medium text-gray-700">Need to update your address?</h3>
+        <button
+          className="text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md"
+          onClick={handleProfile}
+        >
+          Change Address
+        </button>
+      </div>
     </div>
   );
 };

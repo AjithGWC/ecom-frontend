@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import { createSeller } from "../../../redux/actions/backend/backendActions";
+import { toast } from 'react-toastify';
 
 const SellerAdd = () => {
     const dispatch = useDispatch();
@@ -40,9 +41,11 @@ const SellerAdd = () => {
     };
 
     const handleSave = async () => {
-        console.log(formData);
         dispatch(createSeller(token, formData));
         handleBack();
+        setTimeout(() => {
+            toast.success('Seller Created successfully!!', { autoClose: 5000 });
+        }, 500);
     };
 
     const handleBack = () => {
@@ -76,6 +79,7 @@ const SellerAdd = () => {
                                 placeholder="Type First Name"
                                 value={formData.firstName}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -89,6 +93,7 @@ const SellerAdd = () => {
                                 placeholder="Type Last Name"
                                 value={formData.lastName}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -102,6 +107,7 @@ const SellerAdd = () => {
                                 placeholder="Type Email"
                                 value={formData.email}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -115,6 +121,8 @@ const SellerAdd = () => {
                                 placeholder="Type Password"
                                 value={formData.password}
                                 onChange={handleChange}
+                                autoComplete="current-password"
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -128,6 +136,7 @@ const SellerAdd = () => {
                                 placeholder="Type Country Code"
                                 value={formData.countryCode}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -141,6 +150,7 @@ const SellerAdd = () => {
                                 placeholder="Type Phone Number"
                                 value={formData.phoneNumber}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -156,6 +166,7 @@ const SellerAdd = () => {
                                     { value: 'male', label: 'Male' },
                                     { value: 'female', label: 'Female' }
                                 ]}
+                                required
                             />
                         </div>
                         {/* <div className="w-full">
@@ -182,6 +193,7 @@ const SellerAdd = () => {
                                 placeholder="Type District"
                                 value={formData.district}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -195,6 +207,7 @@ const SellerAdd = () => {
                                 placeholder="Type State"
                                 value={formData.state}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -208,6 +221,7 @@ const SellerAdd = () => {
                                 placeholder="Type Country"
                                 value={formData.country}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -220,6 +234,7 @@ const SellerAdd = () => {
                                 placeholder="Type Address"
                                 value={formData.address}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                     </div>

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import { createCategory } from "../../../redux/actions/backend/backendActions";
+import { toast } from 'react-toastify';
 
 const CategoryAdd = () => {
     const navigate = useNavigate();
@@ -31,6 +32,9 @@ const CategoryAdd = () => {
             const token = Cookies.get('token');
             dispatch(createCategory(token, formData));
             navigate('/backend/category');
+            setTimeout(() => {
+                toast.success('Category Created successfully!!', { autoClose: 5000 });
+            }, 500);
         } catch (error) {
             console.error('Error adding category:', error);
         }
@@ -63,6 +67,7 @@ const CategoryAdd = () => {
                                 placeholder="Type Category Name"
                                 value={formData.Name}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -76,6 +81,7 @@ const CategoryAdd = () => {
                                 placeholder="Type Image Name"
                                 value={formData.image}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -88,6 +94,7 @@ const CategoryAdd = () => {
                                 placeholder="Type Category Description"
                                 value={formData.description}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                     </div>

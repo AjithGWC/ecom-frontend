@@ -20,7 +20,7 @@
   }
   
   .cart-item .remove-button {
-    margin-top: 16px;
+    margin-top: 20px !important;
   }
   
   @media (min-width: 768px) {

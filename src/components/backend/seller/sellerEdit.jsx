@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductsById } from '../../../redux/actions/APIActions'; 
 import { updateSeller, fetchSellerById, fetchUserById } from "../../../redux/actions/backend/backendActions";
+import { toast } from 'react-toastify';
 
 const SellerEdit = () => {
     const dispatch = useDispatch();
@@ -47,7 +48,6 @@ const SellerEdit = () => {
             });
         }
     }, [sellerDetail]);
-    console.log(formData);
 
     useEffect(() => {
         dispatch(fetchSellerById(token, id));
@@ -77,9 +77,11 @@ const SellerEdit = () => {
     };
 
     const handleSave = async () => {
-        console.log(formData);
         dispatch(updateSeller(token, id, formData));
         handleBack();
+        setTimeout(() => {
+            toast.success('Seller Updated successfully!!', { autoClose: 5000 });
+        }, 500);
     };
 
     return(
@@ -109,6 +111,7 @@ const SellerEdit = () => {
                                 placeholder="Type First Name"
                                 value={formData.firstName}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -122,6 +125,7 @@ const SellerEdit = () => {
                                 placeholder="Type Last Name"
                                 value={formData.lastName}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -135,6 +139,7 @@ const SellerEdit = () => {
                                 placeholder="Type Email"
                                 value={formData.email}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -148,6 +153,7 @@ const SellerEdit = () => {
                                 placeholder="Type Password"
                                 value={formData.password}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -161,6 +167,7 @@ const SellerEdit = () => {
                                 placeholder="Type Country Code"
                                 value={formData.countryCode}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -174,6 +181,7 @@ const SellerEdit = () => {
                                 placeholder="Type Phone Number"
                                 value={formData.phoneNumber}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -190,6 +198,7 @@ const SellerEdit = () => {
                                     { value: 'male', label: 'Male' },
                                     { value: 'female', label: 'Female' }
                                 ]}
+                                required
                             />
                         </div>
                         {/* <div className="w-full">
@@ -216,6 +225,7 @@ const SellerEdit = () => {
                                 placeholder="Type District"
                                 value={formData.district}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -229,6 +239,7 @@ const SellerEdit = () => {
                                 placeholder="Type State"
                                 value={formData.state}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -242,6 +253,7 @@ const SellerEdit = () => {
                                 placeholder="Type Country"
                                 value={formData.country}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -254,6 +266,7 @@ const SellerEdit = () => {
                                 placeholder="Type Address"
                                 value={formData.address}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                     </div>

@@ -7,7 +7,7 @@ const BackendHome = () => {
         <div className="py-5 px-2">
             <div className="flex">
                 <BackendNavbar />
-                <div className="content">
+                <div className="flex-grow content">
                     <Outlet />
                 </div>
                 

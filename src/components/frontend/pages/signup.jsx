@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -32,12 +33,17 @@ const Signup = () => {
       
       if (response.status == "201") {
         navigate('/login');
+        setTimeout(() => {
+          toast.success('Signup successful!', { autoClose: 5000 });
+        }, 500);
       } else {
-        alert('Signup failed');
+        console.log(response);
+        
+        toast.error('Signup failed', { autoClose: 5000 }); 
       }
     } catch (error) {
       console.error('Signup failed:', error);
-      alert('Signup failed');
+      toast.error('Signup failed', { autoClose: 5000 }); 
     }
   };
 
@@ -100,6 +106,7 @@ const Signup = () => {
                 id="password"
                 name="password"
                 value={formData.password}
+                minLength={8}
                 onChange={handleChange}
                 className="w-full p-2 border border-gray-300 rounded"
                 required
@@ -125,7 +132,7 @@ const Signup = () => {
                   Phone Number
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   id="phoneNumber"
                   name="phoneNumber"
                   value={formData.phoneNumber}
@@ -163,6 +170,7 @@ const Signup = () => {
                 name="address"
                 value={formData.address}
                 onChange={handleChange}
+                minLength={8}
                 className="w-full p-2 border border-gray-300 rounded"
                 required
               />

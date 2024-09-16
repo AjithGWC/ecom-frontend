@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import { createProduct } from "../../../redux/actions/backend/backendActions";
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import '../../../dist/css/app.css';
 
 const getAuthToken = () => {
@@ -116,11 +117,11 @@ const ProductAdd = () => {
         try {
             const token = getAuthToken();
         
-            console.log(formData);
-            
-        
             dispatch(createProduct(token, formData));
             navigate('/backend/product');
+            setTimeout(() => {
+                toast.success('Product Created successfully!!', { autoClose: 5000 });
+            }, 500);
         } catch (error) {
             console.error('Error adding product:', error);
         }
@@ -139,9 +140,9 @@ const ProductAdd = () => {
                     <h1 className="text-lg font-bold" id="header-title">Add Product</h1>
                 </div>
             </div>
-            <div className="grid grid-cols-1 gap-6 mt-5">
-                <div className="grid1 grid-cols-2 gap-6 box mt-5">
-                    <div className="intro-y p-5 grid grid-cols-2 gap-4">
+            <div className="mt-5">
+                <div className="box mt-5">
+                    <div className="intro-y p-5 grid grid-cols-2 gap-4 sm:grid-cols-1">
                         <div className="w-full">
                             <label htmlFor="crud-form-1" className="form-label">
                                 Product Name
@@ -153,6 +154,7 @@ const ProductAdd = () => {
                                 placeholder="Type Product Name"
                                 value={formData.Name}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -166,6 +168,7 @@ const ProductAdd = () => {
                                 options={categoryOptions}
                                 onChange={handleSelectChange}
                                 isSearchable={true}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -178,6 +181,7 @@ const ProductAdd = () => {
                                 placeholder="Type Product Description"
                                 value={formData.description}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -191,6 +195,7 @@ const ProductAdd = () => {
                                 placeholder="Type Image URL"
                                 value={formData.image}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
 
@@ -205,6 +210,7 @@ const ProductAdd = () => {
                                 options={sellerOptions}
                                 onChange={handleSelectChange}
                                 isSearchable={true}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -218,6 +224,7 @@ const ProductAdd = () => {
                                 options={CountryOptions}
                                 onChange={handleSelectChange}
                                 isSearchable={true}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -231,6 +238,7 @@ const ProductAdd = () => {
                                 placeholder="Type Product Price"
                                 value={formData.price}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="w-full">
@@ -244,6 +252,7 @@ const ProductAdd = () => {
                                 placeholder="Type Product Quantity"
                                 value={formData.quantity}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                     </div>

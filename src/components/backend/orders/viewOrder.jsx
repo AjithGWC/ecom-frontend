@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getOrderByOrderId } from "../../../redux/actions/APIActions";
 
-const OrderView = () => {
+const BackendOrderView = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const ordersByOrderId = useSelector((state) => state.apireducer.fetchedOrdersByOrderId) || [];
@@ -34,4 +34,4 @@ const OrderView = () => {
     );
 };
 
-export default OrderView;
+export default BackendOrderView;

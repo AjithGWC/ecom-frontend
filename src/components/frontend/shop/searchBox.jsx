@@ -17,13 +17,13 @@ const SearchBox = ({ setFilteredProducts, products }) => {
   };
 
   return (
-    <div className='flex items-center border rounded-lg p-2 w-full md:w-64'>
+    <div className='flex items-center bg-white  rounded-lg p-2 w-full md:w-64'>
       <input
         type="text"
         value={searchTerm}
         onChange={handleSearch}
         placeholder="Search products..."
-        className="w-full p-2 outline-none text-sm"
+        className="w-full p-2 outline-none border-0 text-sm"
       />
       <Search className='text-gray-400 ml-2' />
     </div>

@@ -31,6 +31,8 @@ import CategoryEdit from './components/backend/category/editCategory';
 import SellerList from './components/backend/seller/seller';
 import SellerAdd from './components/backend/seller/sellerAdd';
 import SellerEdit from './components/backend/seller/sellerEdit';
+import OrderList from './components/backend/orders/orders';
+import BackendOrderView from './components/backend/orders/viewOrder';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -40,25 +42,36 @@ const App = () => {
     const token = Cookies.get('token');
     return token;
   };
-  const userId = Cookies.get('userId');
 
-  const token = getAuthToken();
+  const userId = Cookies.get('userId');
 
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchCategories());
 
-    if (token && userId) {
+    if (getAuthToken() && userId) {
       dispatch(fetchCartByUserId(userId));
       dispatch(fetchWishlistByUserId(userId));
     }
-  }, [dispatch, token, userId]);
+  }, [dispatch, userId]);
 
   useEffect(() => {
     if (fetchedCart && fetchedCart.products) {
       dispatch(fetchCartProductByIds(fetchedCart.products));
     }
   }, [fetchedCart, dispatch]);
+
+  const ProtectedAdminRoute = ({ children }) => {
+    const token = getAuthToken();
+    const role = Cookies.get('role');
+    
+    if (!token || !role) {
+      return <Navigate to="/backend/login" />;
+    } else if (role !== 'admin') {
+        return <Navigate to="/" />;
+    }
+    return children;
+  };
 
   return (
     <React.StrictMode>
@@ -73,7 +86,7 @@ const App = () => {
             <Route path="/cart" element={<Cart />} />
             <Route path="/favorites" element={<Wishlist />} />
             <Route path="/checkout" element={<Checkout />} />
-            <Route path="/profile/:id" element={<ProfileHome />} >
+            <Route path="/profile/:id" element={<ProfileHome />}>
               <Route index element={<Profile />} />
               <Route path="orders" element={<MyOrders />} />
               <Route path="orders/:id" element={<OrderView />} />
@@ -81,9 +94,14 @@ const App = () => {
           </Route>
 
           <Route path="/backend/login" element={<Login />} />
-          <Route 
-            path="/backend" 
-            element={token ? <BackendHome /> : <Navigate to="/backend/login" />}>
+          <Route
+            path="/backend/*"
+            element={
+              <ProtectedAdminRoute>
+                <BackendHome />
+              </ProtectedAdminRoute>
+            }
+          >
             <Route path="" element={<Navigate to="product" />} />
             <Route path="product" element={<ProductList />} />
             <Route path="add-product" element={<ProductAdd />} />
@@ -94,11 +112,13 @@ const App = () => {
             <Route path="seller" element={<SellerList />} />
             <Route path="add-seller" element={<SellerAdd />} />
             <Route path="edit-seller/:id" element={<SellerEdit />} />
+            <Route path="order" element={<OrderList />} />
+            <Route path="order-view/:id" element={<BackendOrderView />} />
           </Route>
         </Routes>
       </Router>
     </React.StrictMode>
   );
-}
+};
 
 export default App;

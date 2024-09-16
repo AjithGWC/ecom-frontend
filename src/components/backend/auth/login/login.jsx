@@ -4,6 +4,8 @@ import './Login.css';
 import Cookies from 'js-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
 const LoginPage = () => {
@@ -36,9 +38,15 @@ const LoginPage = () => {
 
       if (response.status === 200 && role == "admin") {
         navigate('/backend/product');
+        setTimeout(() => {
+          toast.success('Login successful!', { autoClose: 5000 });
+        }, 500);
       } else if(role == "user"){
-        alert("Only for Admin Login");
+        // alert("Only for Admin Login");
         navigate('/login');
+        setTimeout(() => {
+          toast.error('Only for Admin Login!', { autoClose: 5000 });
+        }, 500);
       }else {
         console.error('Login failed:', response.statusText);
       }
@@ -63,6 +71,7 @@ const LoginPage = () => {
               id="email"
               value={email}
               onChange={(e) => setemail(e.target.value)}
+              autocomplete="username"
               required
             />
           </div>
@@ -73,6 +82,7 @@ const LoginPage = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              autocomplete="current-password"
               required
             />
             <button type="button" className="password-toggle" onClick={togglePasswordVisibility}>
@@ -82,6 +92,7 @@ const LoginPage = () => {
           <button type="submit" className="login-button">Login</button>
         </form>
       </div>
+      <ToastContainer autoClose={10000} />
     </div>
   );
 };

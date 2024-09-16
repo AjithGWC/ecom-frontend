@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSeller, fetchUserById } from '../../../redux/actions/backend/backendActions';
-import { deleteSeller } from "../../../redux/actions/backend/backendActions";
+import { fetchSeller, fetchUserById, deleteSeller } from '../../../redux/actions/backend/backendActions';
 import { Trash2, Edit } from "react-feather";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SellerList = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(5); 
     const token = Cookies.get('token');
     const sellers = useSelector(state => state.backend.seller); 
     const sellerDetails = useSelector(state => state.backend.user); 
@@ -24,18 +27,25 @@ const SellerList = () => {
 
     useEffect(() => {
         dispatch(fetchSeller(token));
-    }, [dispatch]);
+    }, [dispatch, token]);
 
     useEffect(() => {
         if (sellerDetails) {
             setData(sellerDetails);
-            
         } else {
             console.error('Unexpected response format:', sellerDetails);
             setData([]);
         }
-            
     }, [sellerDetails]);
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(data.length / itemsPerPage);
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
 
     const handleAddProduct = () => {
         navigate('/backend/add-seller');
@@ -50,7 +60,7 @@ const SellerList = () => {
         navigate('/backend/seller');
     };
 
-    return(
+    return (
         <div>
             <div className="box mt-5">
                 <div className="flex flex-col lg:flex-row items-center p-5">
@@ -77,9 +87,9 @@ const SellerList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((item, index) => (
+                        {currentItems.map((item, index) => (
                             <tr key={item._id}>
-                                <td>{ ++index }</td>
+                                <td>{ indexOfFirstItem + index + 1 }</td>
                                 <td>{item.firstName + " " + item.lastName}</td>
                                 <td>{item.email}</td>
                                 <td>{item.phoneNumber}</td>
@@ -101,7 +111,35 @@ const SellerList = () => {
                         ))}
                     </tbody>
                 </table>
+                {totalPages > 1 && (
+                    <div className="flex justify-center mt-4 space-x-2">
+                        <button 
+                            className={`btn ${currentPage === 1 ? 'btn-secondary disabled' : 'btn-primary'}`} 
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            disabled={currentPage === 1}
+                        >
+                            Previous
+                        </button>
+                        {Array.from({ length: totalPages }, (_, index) => (
+                            <button 
+                                key={index + 1}
+                                className={`btn ${currentPage === index + 1 ? 'btn-primary' : 'btn-secondary'}`} 
+                                onClick={() => handlePageChange(index + 1)}
+                            >
+                                {index + 1}
+                            </button>
+                        ))}
+                        <button 
+                            className={`btn ${currentPage === totalPages ? 'btn-secondary disabled' : 'btn-primary'}`} 
+                            onClick={() => handlePageChange(currentPage + 1)}
+                            disabled={currentPage === totalPages}
+                        >
+                            Next
+                        </button>
+                    </div>
+                )}
             </div>
+            <ToastContainer />
         </div>
     );
 };
