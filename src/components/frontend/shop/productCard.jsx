@@ -8,6 +8,7 @@ import { setWishlist, removeWishlist } from '../../../redux/actions/wishlistActi
 import { addToWishlist, fetchCartByUserId, fetchWishlistByUserId } from '../../../redux/actions/APIActions';
 import { selectWishlistItems } from '../../../redux/selectors/wishlistSelector';
 import { toast } from 'react-toastify';
+import axiosClient from '../../../api/axiosClient';
 
 const ProductCard = ({ productItem }) => {
   const navigate = useNavigate();
@@ -67,25 +68,13 @@ const ProductCard = ({ productItem }) => {
   const handleAdd = async () => {
     if (token) {
       try {
-        const cartResponse = await fetch(`https://ecommerce-backend-mdiu.onrender.com/cart/${userId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-          body: JSON.stringify({ 
-            productId: productItem._id, 
-            quantity: quantity 
-          }),
+        await axiosClient.post(`/cart/${userId}`, {
+          productId: productItem._id,
+          quantity: quantity
         });
-
-        if (!cartResponse.ok) {
-          console.error('Failed to update cart');
-        } else {
-          toast.success('Cart Updated successful!', { autoClose: 5000 });
-          dispatch(setCart(productItem, quantity));
-          dispatch(fetchCartByUserId(userId));
-        }
+        toast.success('Cart Updated successful!', { autoClose: 5000 });
+        dispatch(setCart(productItem, quantity));
+        dispatch(fetchCartByUserId(userId));
       } catch (error) {
         console.error('Failed to add product to cart:', error);
       }

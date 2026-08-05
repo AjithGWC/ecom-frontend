@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCart } from "../../../redux/actions/cartActions";
 import Cookies from 'js-cookie';
+import axiosClient from '../../../api/axiosClient';
 import "./productView.css";
 
 const ProductView = ({ product, category }) => {
@@ -37,23 +38,11 @@ const ProductView = ({ product, category }) => {
   const handleAdd = async () => {
     if (token) {
       try {
-        const cartResponse = await fetch(`https://ecommerce-backend-mdiu.onrender.com/cart/${userId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-          body: JSON.stringify({ 
-            productId: product._id, 
-            quantity: quantity
-          }),
+        await axiosClient.post(`/cart/${userId}`, {
+          productId: product._id,
+          quantity: quantity
         });
-
-        if (!cartResponse.ok) {
-          console.error('Failed to update cart');
-        } else {
-          dispatch(setCart(product, quantity));
-        }
+        dispatch(setCart(product, quantity));
       } catch (error) {
         console.error('Failed to add product to cart:', error);
       }

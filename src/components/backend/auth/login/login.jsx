@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
+import axiosClient from '../../../../api/axiosClient';
 
 const LoginPage = () => {
   const [email, setemail] = useState('');
@@ -18,7 +18,7 @@ const LoginPage = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('https://ecommerce-backend-mdiu.onrender.com/login', {
+      const response = await axiosClient.post('/login', {
         email,
         password,
       }, {

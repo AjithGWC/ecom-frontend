@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import axiosClient from '../../../api/axiosClient';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./login.css"
@@ -13,7 +13,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://ecommerce-backend-mdiu.onrender.com/login', { email, password });
+      const response = await axiosClient.post('/login', { email, password });
   
       if (response.data.data.token) {
         document.cookie = `token=${response.data.data.token}; path=/; secure; samesite=strict`;

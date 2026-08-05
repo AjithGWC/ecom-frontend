@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductsById } from '../../../redux/actions/APIActions'; 
 import { updateProduct } from "../../../redux/actions/backend/backendActions";
-import axios from 'axios';
+import axiosClient from '../../../api/axiosClient';
 import { toast } from 'react-toastify';
 import '../../../dist/css/app.css';
 
@@ -40,7 +40,7 @@ const ProductEdit = () => {
 
         const fetchCategoryOptions = async () => {
             try {
-                const response = await axios.get('https://ecommerce-backend-mdiu.onrender.com/admin/category/', {
+                const response = await axiosClient.get('/admin/category/', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -57,7 +57,7 @@ const ProductEdit = () => {
 
         const fetchSellerOptions = async () => {
             try {
-                const response = await axios.get('https://ecommerce-backend-mdiu.onrender.com/admin/users/', {
+                const response = await axiosClient.get('/admin/users/', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -77,7 +77,7 @@ const ProductEdit = () => {
 
         const fetchCountryOptions = async () => {
             try {
-                const response = await axios.get('https://ecommerce-backend-mdiu.onrender.com/admin/country/', {
+                const response = await axiosClient.get('/admin/country/', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

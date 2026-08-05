@@ -13,12 +13,12 @@ import {
   FETCH_USER_BY_ID ,
   UPDATE_USER_BY_ID
 } from '../../constants/backend/backendConstant';
-import axios from 'axios'; 
+import axiosClient from '../../../api/axiosClient';
 
 // Action to create a new product
 export const createProduct = (token, formData) => async (dispatch) => {
     try {
-      const response = await axios.post('https://ecommerce-backend-mdiu.onrender.com/admin/product/', formData, {
+      const response = await axiosClient.post('/admin/product/', formData, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -36,7 +36,7 @@ export const createProduct = (token, formData) => async (dispatch) => {
   // Action to update an existing product
   export const updateProduct = (token, productId, product) => async (dispatch) => {    
     try {
-      const response = await axios.post(`https://ecommerce-backend-mdiu.onrender.com/admin/product/${productId}`, product, {
+      const response = await axiosClient.post(`/admin/product/${productId}`, product, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -54,7 +54,7 @@ export const createProduct = (token, formData) => async (dispatch) => {
   // Action to delete a product
   export const deleteProduct = (token, productId) => async (dispatch) => {
     try {
-      const response = await axios.delete(`https://ecommerce-backend-mdiu.onrender.com/admin/product/${productId}`, {
+      const response = await axiosClient.delete(`/admin/product/${productId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -72,7 +72,7 @@ export const createProduct = (token, formData) => async (dispatch) => {
   // Action to create a new category
   export const createCategory = (token, formData) => async (dispatch) => {
     try {
-      const response = await axios.post('https://ecommerce-backend-mdiu.onrender.com/admin/category/', formData, {
+      const response = await axiosClient.post('/admin/category/', formData, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -90,7 +90,7 @@ export const createProduct = (token, formData) => async (dispatch) => {
   // Action to update an existing category
   export const updateCategory = (token, categoryId, category) => async (dispatch) => {    
     try {
-      const response = await axios.post(`https://ecommerce-backend-mdiu.onrender.com/admin/category/${categoryId}`, category, {
+      const response = await axiosClient.post(`/admin/category/${categoryId}`, category, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -108,7 +108,7 @@ export const createProduct = (token, formData) => async (dispatch) => {
   // Action to delete a category
   export const deleteCategory = (token, categoryId) => async (dispatch) => {
     try {
-      const response = await axios.delete(`https://ecommerce-backend-mdiu.onrender.com/admin/category/${categoryId}`, {
+      const response = await axiosClient.delete(`/admin/category/${categoryId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -126,7 +126,7 @@ export const createProduct = (token, formData) => async (dispatch) => {
   // Action to fetch Sellers
   export const fetchSeller = (token) => async (dispatch) => {
     try {
-      const response = await axios.get('https://ecommerce-backend-mdiu.onrender.com/admin/seller/', {
+      const response = await axiosClient.get('/admin/seller/', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -144,7 +144,7 @@ export const createProduct = (token, formData) => async (dispatch) => {
   // Action to create a new Seller
   export const createSeller = (token, formData) => async (dispatch) => {
     try {
-      const response = await axios.post('https://ecommerce-backend-mdiu.onrender.com/admin/seller/', formData, {
+      const response = await axiosClient.post('/admin/seller/', formData, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -162,7 +162,7 @@ export const createProduct = (token, formData) => async (dispatch) => {
   // Action to fetch Seller by Id
   export const fetchSellerById = (token, sellerId) => async (dispatch) => {    
     try {
-      const response = await axios.get(`https://ecommerce-backend-mdiu.onrender.com/admin/seller/${sellerId}`, {
+      const response = await axiosClient.get(`/admin/seller/${sellerId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -180,7 +180,7 @@ export const createProduct = (token, formData) => async (dispatch) => {
   // Action to update an existing Seller
   export const updateSeller = (token, sellerId, seller) => async (dispatch) => {    
     try {
-      const response = await axios.post(`https://ecommerce-backend-mdiu.onrender.com/admin/seller/${sellerId}`, seller, {
+      const response = await axiosClient.post(`/admin/seller/${sellerId}`, seller, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -198,7 +198,7 @@ export const createProduct = (token, formData) => async (dispatch) => {
   // Action to delete a Seller
   export const deleteSeller = (token, sellerId) => async (dispatch) => {
     try {
-      const response = await axios.delete(`https://ecommerce-backend-mdiu.onrender.com/admin/seller/${sellerId}`, {
+      const response = await axiosClient.delete(`/admin/seller/${sellerId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -216,7 +216,7 @@ export const createProduct = (token, formData) => async (dispatch) => {
   // Action to fetch user by Id
   export const fetchUserById = (token, userId) => async (dispatch) => {
     try {
-      const response = await axios.get(`https://ecommerce-backend-mdiu.onrender.com/admin/users/${userId}`, {
+      const response = await axiosClient.get(`/admin/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -234,7 +234,7 @@ export const createProduct = (token, formData) => async (dispatch) => {
   // Action to UPDATE user by Id
   export const updateUserById = (token, userId, data) => async (dispatch) => {
     try {
-      const response = await axios.post(`https://ecommerce-backend-mdiu.onrender.com/admin/users/${userId}`, data, {
+      const response = await axiosClient.post(`/admin/users/${userId}`, data, {
         headers: {
           Authorization: `Bearer ${token}`
         }

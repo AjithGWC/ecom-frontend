@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import { createProduct } from "../../../redux/actions/backend/backendActions";
-import axios from 'axios';
+import axiosClient from '../../../api/axiosClient';
 import { toast } from 'react-toastify';
 import '../../../dist/css/app.css';
 
@@ -36,7 +36,7 @@ const ProductAdd = () => {
 
         const fetchCategoryOptions = async () => {
             try {
-                const response = await axios.get('https://ecommerce-backend-mdiu.onrender.com/admin/category/', {
+                const response = await axiosClient.get('/admin/category/', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -53,7 +53,7 @@ const ProductAdd = () => {
 
         const fetchSellerOptions = async () => {
             try {
-                const response = await axios.get('https://ecommerce-backend-mdiu.onrender.com/admin/users/', {
+                const response = await axiosClient.get('/admin/users/', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -74,7 +74,7 @@ const ProductAdd = () => {
 
         const fetchCountryOptions = async () => {
             try {
-                const response = await axios.get('https://ecommerce-backend-mdiu.onrender.com/admin/country/', {
+                const response = await axiosClient.get('/admin/country/', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

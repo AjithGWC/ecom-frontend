@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import axiosClient from '../../../api/axiosClient';
 import { toast } from 'react-toastify';
 
 const Signup = () => {
@@ -28,7 +28,7 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://ecommerce-backend-mdiu.onrender.com/admin/users/', formData);
+      const response = await axiosClient.post('/admin/users/', formData);
       console.log(response);
       
       if (response.status == "201") {
